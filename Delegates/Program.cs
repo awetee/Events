@@ -7,12 +7,16 @@
         private static void Main(string[] args)
         {
             var grades = new Grade[5];
-            var listener = new NameChangedDelegate(OnNameChanged);
-            grades[0] = new Grade { NameChanged = listener, Name = "Joe", Score = 12.45f };
-            grades[1] = new Grade { NameChanged = listener, Name = "John", Score = 14.45f };
-            grades[2] = new Grade { NameChanged = listener, Name = "Lucy", Score = 15.45f };
-            grades[3] = new Grade { NameChanged = listener, Name = "Mary", Score = 13.45f };
-            grades[4] = new Grade { NameChanged = listener, Name = "Frank", Score = 16.45f };
+            grades[0] = new Grade { Name = "Joe", Score = 12.45f };
+            grades[0].NameChanged += OnNameChanged;
+            grades[1] = new Grade { Name = "John", Score = 14.45f };
+            grades[1].NameChanged += OnNameChanged;
+            grades[2] = new Grade { Name = "Lucy", Score = 15.45f };
+            grades[2].NameChanged += OnNameChanged;
+            grades[3] = new Grade { Name = "Mary", Score = 13.45f };
+            grades[3].NameChanged += OnNameChanged;
+            grades[4] = new Grade { Name = "Frank", Score = 16.45f };
+            grades[4].NameChanged += OnNameChanged;
 
             var gradeBook = new GradeBook(grades);
 
@@ -30,6 +34,8 @@
             foreach (var grade in gradeBook.Grades)
             {
                 grade.NameChanged += listener2;
+                grade.NameChanged += listener2;
+                grade.NameChanged -= listener2;
             }
         }
 

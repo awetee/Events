@@ -25,7 +25,7 @@
                 {
                     if (this._name != value)
                     {
-                        this.NameChanged(this._name, value);
+                        this.NameChanged?.Invoke(this._name, value);
                     }
 
                     this._name = value;
@@ -33,7 +33,7 @@
             }
         }
 
-        public NameChangedDelegate NameChanged;
+        public event NameChangedDelegate NameChanged;
 
         public float Score { get; set; }
     }
