@@ -25,7 +25,7 @@
                 {
                     if (this._name != value)
                     {
-                        this.NameChanged?.Invoke(this._name, value);
+                        this.NameChanged?.Invoke(this, new NameChangedEventArgs { ExistingName = this._name, NewName = value });
                     }
 
                     this._name = value;

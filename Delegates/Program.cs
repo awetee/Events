@@ -21,32 +21,15 @@
             var gradeBook = new GradeBook(grades);
 
             PrintGrades(gradeBook);
-            AddListener(gradeBook);
             ChangeGrades(gradeBook);
             PrintGrades(gradeBook);
 
             Console.Read();
         }
 
-        private static void AddListener(GradeBook gradeBook)
+        private static void OnNameChanged(object sender, NameChangedEventArgs args)
         {
-            var listener2 = new NameChangedDelegate(OnNameChanged2);
-            foreach (var grade in gradeBook.Grades)
-            {
-                grade.NameChanged += listener2;
-                grade.NameChanged += listener2;
-                grade.NameChanged -= listener2;
-            }
-        }
-
-        private static void OnNameChanged(string previousName, string newName)
-        {
-            Console.WriteLine($"Name changed from: {previousName} To: {newName}");
-        }
-
-        private static void OnNameChanged2(string previousName, string newName)
-        {
-            Console.WriteLine("*****");
+            Console.WriteLine($"Name changed from: {args.ExistingName} To: {args.NewName}");
         }
 
         private static void ChangeGrades(GradeBook gradeBook)
@@ -60,10 +43,14 @@
 
         private static void PrintGrades(GradeBook gradeBook)
         {
+            Console.WriteLine("--------------------------------------");
+
             foreach (var grade in gradeBook.Grades)
             {
                 Console.WriteLine($"{grade.Name}'s grade is: {grade.Score}");
             }
+
+            Console.WriteLine("--------------------------------------");
         }
     }
 }
